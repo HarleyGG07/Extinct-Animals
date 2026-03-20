@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Browse an interactive gallery of extinct species with search, filters, and detail views powered by vanilla JavaScript." />
+  <title>Extinct Animals | Species Gallery</title>
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#13110f" />
+  <link rel="canonical" href="https://your-domain.example/species.html" />
+
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Extinct Animals" />
+  <meta property="og:title" content="Extinct Animals | Species Gallery" />
+  <meta property="og:description" content="Browse an interactive gallery of extinct species with search, filters, and detail views powered by vanilla JavaScript." />
+  <meta property="og:url" content="https://your-domain.example/species.html" />
+  <meta property="og:image" content="/assets/banners/Banner.png" />
+  <meta property="og:image:alt" content="Extinct Animals banner with natural history theme" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Extinct Animals | Species Gallery" />
+  <meta name="twitter:description" content="Browse an interactive gallery of extinct species with search, filters, and detail views powered by vanilla JavaScript." />
+  <meta name="twitter:image" content="/assets/banners/Banner.png" />
+  <meta name="twitter:image:alt" content="Extinct Animals banner with natural history theme" />
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" type="image/png" href="assets/icons/Logo.png" />
+</head>
+<body data-page="species.html">
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="logo" href="index.html" aria-label="Extinct Animals home page">
+        <span class="logo-mark"><img src="assets/icons/Logo.png" alt="Extinct Animals logo" /></span>
+        <span class="logo-text">
+          <strong>Extinct Animals</strong>
+          <small>A Journey Through Vanished Life</small>
+        </span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-label="Toggle navigation menu" aria-controls="primaryNav" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav aria-label="Main navigation">
+        <ul class="nav-links" id="primaryNav">
+          <li><a href="index.html" data-page="index.html">Home</a></li>
+          <li><a href="about.html" data-page="about.html">About</a></li>
+          <li><a href="timeline.html" data-page="timeline.html">Timeline</a></li>
+          <li><a href="species.html" data-page="species.html">Species</a></li>
+          <li><a href="lessons.html" data-page="lessons.html">Lessons</a></li>
+          <li><a href="contact.html" data-page="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero species-hero">
+      <div class="container hero-content" data-reveal>
+        <span class="eyebrow">Interactive Gallery</span>
+        <h1>Explore Extinct Species</h1>
+        <p>
+          Search and filter across iconic extinct animals from different regions and time periods. Every card is rendered dynamically from
+          JavaScript data so the collection can be expanded later without changing HTML structure.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-heading" data-reveal>
+          <span class="eyebrow">Species Database</span>
+          <h2>Lost Animals, Documented for Learning</h2>
+          <p>Use search and filters to find species by type, region, and major extinction causes.</p>
+        </div>
+
+        <section class="control-panel" aria-label="Species search and filters" data-reveal>
+          <div class="control-grid">
+            <div>
+              <label for="speciesSearch">Search by name</label>
+              <input id="speciesSearch" type="text" placeholder="Example: Dodo or Mammoth" />
+            </div>
+            <div>
+              <label for="typeFilter">Animal type</label>
+              <select id="typeFilter">
+                <option value="all">All types</option>
+              </select>
+            </div>
+            <div>
+              <label for="regionFilter">Region</label>
+              <select id="regionFilter">
+                <option value="all">All regions</option>
+              </select>
+            </div>
+            <div>
+              <label for="causeFilter">Cause of extinction</label>
+              <select id="causeFilter">
+                <option value="all">All causes</option>
+              </select>
+            </div>
+            <div>
+              <label for="sortSpecies">Sort</label>
+              <select id="sortSpecies">
+                <option value="name-asc">Name (A-Z)</option>
+                <option value="name-desc">Name (Z-A)</option>
+                <option value="recent-first">Most recent extinction</option>
+                <option value="oldest-first">Oldest extinction</option>
+              </select>
+            </div>
+          </div>
+          <div class="filter-actions">
+            <p class="results-note" id="speciesCount">Loading species...</p>
+            <button class="btn btn-secondary" id="resetFilters" type="button">Reset Filters</button>
+          </div>
+        </section>
+
+        <section class="species-grid" id="speciesGrid" aria-live="polite"></section>
+
+        <div class="empty-state hidden" id="speciesEmpty" role="status">
+          <p>No species match your current filters. Try changing the search or reset all filters.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal hidden" id="speciesModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-panel">
+      <button class="modal-close" id="modalClose" type="button" aria-label="Close details modal">&times;</button>
+      <div class="modal-content">
+        <div class="modal-image">
+          <img id="modalImage" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="Species illustration" />
+        </div>
+        <div class="modal-details">
+          <h3 id="modalTitle"></h3>
+          <p class="scientific" id="modalScientific"></p>
+          <ul class="modal-list" id="modalFacts"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <h2>Extinct Animals</h2>
+        <p>Learning from vanished life to protect biodiversity today.</p>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="timeline.html">Extinction Timeline</a></li>
+          <li><a href="lessons.html">Conservation Lessons</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Project Note</h3>
+        <p>The gallery is data-driven through `js/data.js` and designed for easy content expansion.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Extinct Animals Project. Educational use only.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+  <script src="js/data.js" defer></script>
+</body>
+</html>
+
+
+
+

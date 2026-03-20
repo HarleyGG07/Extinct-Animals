@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Contact page for the Extinct Animals college project with client-side validated feedback form." />
+  <title>Extinct Animals | Contact</title>
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#13110f" />
+  <link rel="canonical" href="https://your-domain.example/contact.html" />
+
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Extinct Animals" />
+  <meta property="og:title" content="Extinct Animals | Contact" />
+  <meta property="og:description" content="Contact page for the Extinct Animals college project with client-side validated feedback form." />
+  <meta property="og:url" content="https://your-domain.example/contact.html" />
+  <meta property="og:image" content="/assets/banners/Banner.png" />
+  <meta property="og:image:alt" content="Extinct Animals banner with natural history theme" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Extinct Animals | Contact" />
+  <meta name="twitter:description" content="Contact page for the Extinct Animals college project with client-side validated feedback form." />
+  <meta name="twitter:image" content="/assets/banners/Banner.png" />
+  <meta name="twitter:image:alt" content="Extinct Animals banner with natural history theme" />
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" type="image/png" href="assets/icons/Logo.png" />
+</head>
+<body data-page="contact.html">
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="logo" href="index.html" aria-label="Extinct Animals home page">
+        <span class="logo-mark"><img src="assets/icons/Logo.png" alt="Extinct Animals logo" /></span>
+        <span class="logo-text">
+          <strong>Extinct Animals</strong>
+          <small>A Journey Through Vanished Life</small>
+        </span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-label="Toggle navigation menu" aria-controls="primaryNav" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav aria-label="Main navigation">
+        <ul class="nav-links" id="primaryNav">
+          <li><a href="index.html" data-page="index.html">Home</a></li>
+          <li><a href="about.html" data-page="about.html">About</a></li>
+          <li><a href="timeline.html" data-page="timeline.html">Timeline</a></li>
+          <li><a href="species.html" data-page="species.html">Species</a></li>
+          <li><a href="lessons.html" data-page="lessons.html">Lessons</a></li>
+          <li><a href="contact.html" data-page="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero contact-hero">
+      <div class="container hero-content" data-reveal>
+        <span class="eyebrow">Feedback and Queries</span>
+        <h1>Contact the Project Team</h1>
+        <p>
+          Share your feedback, suggestions, or academic discussion points about extinction science and website content.
+          Your message helps us improve the accuracy, readability, and educational impact of this project.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-heading" data-reveal>
+          <span class="eyebrow">Contact Information</span>
+          <h2>Ways to Reach This Project</h2>
+          <p>Use these contact channels for content suggestions, project questions, and academic collaboration.</p>
+        </div>
+
+        <div class="contact-grid">
+          <article class="contact-card" data-reveal>
+            <h3>Location</h3>
+            <p>BCA Department Lab, Natural History Project Desk, Kolkata, India</p>
+          </article>
+
+          <article class="contact-card" data-reveal>
+            <h3>Email</h3>
+            <p><a href="mailto:extinctanimals.project@example.com">extinctanimals.project@example.com</a></p>
+          </article>
+
+          <article class="contact-card" data-reveal>
+            <h3>Support Hours</h3>
+            <p>Project desk responses are reviewed during working days, 10:00 AM to 4:00 PM IST.</p>
+          </article>
+        </div>
+
+        <div class="form-shell">
+          <section class="form-panel" data-reveal>
+            <h2>Send Feedback</h2>
+            <form id="contactForm" novalidate>
+              <div class="form-grid">
+                <div>
+                  <label for="fullName">Full Name</label>
+                  <input id="fullName" name="fullName" type="text" required />
+                  <p class="form-error" id="fullNameError"></p>
+                </div>
+
+                <div>
+                  <label for="emailAddress">Email</label>
+                  <input id="emailAddress" name="emailAddress" type="email" required />
+                  <p class="form-error" id="emailAddressError"></p>
+                </div>
+
+                <div>
+                  <label for="subject">Subject</label>
+                  <input id="subject" name="subject" type="text" required />
+                  <p class="form-error" id="subjectError"></p>
+                </div>
+
+                <div>
+                  <label for="message">Message</label>
+                  <textarea id="message" name="message" required></textarea>
+                  <p class="form-error" id="messageError"></p>
+                </div>
+
+                <div>
+                  <button class="btn btn-primary" type="submit">Submit Message</button>
+                </div>
+              </div>
+            </form>
+            <div class="success-message hidden" id="formSuccess" role="status" aria-live="polite">
+              Thank you. Your message has been submitted successfully.
+            </div>
+          </section>
+
+          <aside class="side-note" data-reveal>
+            <h3>Submission Guidelines</h3>
+            <p>
+              Please share clear subject lines and concise feedback so the team can review your message quickly.
+              Valid contact details help us follow up on project-related queries.
+            </p>
+            <figure class="content-media">
+              <img src="assets/images/Contact-Section.png" alt="Contact section illustration" loading="lazy" />
+            </figure>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <h2>Extinct Animals</h2>
+        <p>Learning from vanished life to protect biodiversity today.</p>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Extinction</a></li>
+          <li><a href="timeline.html">Timeline</a></li>
+          <li><a href="lessons.html">Lessons</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Project Note</h3>
+        <p>For academic inquiries and project coordination, please contact the Extinct Animals project desk.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Extinct Animals Project. Educational use only.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>
+
+
+
+
