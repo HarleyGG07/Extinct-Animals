@@ -207,6 +207,7 @@ textarea:focus-visible {
   justify-content: space-between;
   gap: 1rem;
   min-height: 84px;
+  position: relative;
 }
 
 .logo {
@@ -1374,16 +1375,17 @@ nav {
 
   nav {
     margin-left: 0;
+    position: static;
   }
 
   .nav-links {
     position: absolute;
-    left: 0.2rem;
-    right: 0.2rem;
-    top: 82px;
+    left: 0;
+    right: 0;
+    top: calc(100% + 0.35rem);
     background: linear-gradient(160deg, rgba(18, 14, 11, 0.98) 0%, rgba(33, 26, 19, 0.98) 100%);
     border: 1px solid rgba(196, 156, 94, 0.42);
-    border-radius: 0 0 18px 18px;
+    border-radius: 16px;
     box-shadow: 0 16px 30px rgba(0, 0, 0, 0.38);
     padding: 0;
     flex-direction: column;
@@ -1391,12 +1393,19 @@ nav {
     gap: 0;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease, padding 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-6px);
+    z-index: 260;
+    transition: max-height 0.3s ease, padding 0.3s ease, opacity 0.2s ease, transform 0.25s ease;
   }
 
   .nav-links.open {
-    max-height: 360px;
+    max-height: 420px;
     padding: 0.7rem;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
   }
 
   .nav-links li {
