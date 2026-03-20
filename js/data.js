@@ -1,6 +1,35 @@
 (function () {
   "use strict";
 
+  function createPlaceholderImage(label) {
+    var safeLabel = String(label)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&apos;");
+
+    var svg =
+      "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 960 600'>" +
+      "<defs>" +
+      "<linearGradient id='bg' x1='0' y1='0' x2='1' y2='1'>" +
+      "<stop offset='0%' stop-color='#300b11'/>" +
+      "<stop offset='100%' stop-color='#0e0b0d'/>" +
+      "</linearGradient>" +
+      "</defs>" +
+      "<rect width='960' height='600' fill='url(#bg)'/>" +
+      "<circle cx='165' cy='150' r='120' fill='rgba(224,54,54,0.28)'/>" +
+      "<circle cx='805' cy='470' r='170' fill='rgba(224,54,54,0.2)'/>" +
+      "<rect x='95' y='365' width='770' height='140' rx='24' fill='rgba(0,0,0,0.36)'/>" +
+      "<text x='480' y='205' fill='rgba(255,211,216,0.85)' text-anchor='middle' font-family='Segoe UI, sans-serif' font-size='26' letter-spacing='4'>EXTINCT ANIMALS</text>" +
+      "<text x='480' y='450' fill='#ffe7ea' text-anchor='middle' font-family='Georgia, serif' font-size='52'>" +
+      safeLabel +
+      "</text>" +
+      "</svg>";
+
+    return "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg);
+  }
+
   function buildAssetUrl(path) {
     return path
       .split("/")
@@ -8,6 +37,21 @@
         return encodeURIComponent(segment);
       })
       .join("/");
+  }
+
+  function resolveSpeciesImage(species) {
+    if (species.image && species.image.indexOf("assets/") === 0) {
+      return buildAssetUrl(species.image);
+    }
+
+    if (
+      species.image &&
+      (species.image.indexOf("data:") === 0 || species.image.indexOf("http") === 0 || species.image.indexOf("/") === 0)
+    ) {
+      return species.image;
+    }
+
+    return createPlaceholderImage(species.commonName);
   }
 
   var extinctSpecies = [
@@ -160,6 +204,156 @@
       category: "Ice Age predator",
       extinctionYear: -10000,
       image: "assets/images/Smilodon.png"
+    },
+    {
+      id: "carolina-parakeet",
+      commonName: "Carolina Parakeet",
+      scientificName: "Conuropsis carolinensis",
+      type: "Bird",
+      region: "Eastern North America",
+      habitat: "Bottomland forests and river valleys",
+      diet: "Seeds, fruits, and buds",
+      period: "Early 20th century",
+      extinctionCause: "Deforestation, hunting, and disease",
+      shortFact: "It was the only parrot native to the eastern United States.",
+      category: "Modern extinction",
+      extinctionYear: 1918,
+      image: "assets/images/Carolina Parakeet.png"
+    },
+    {
+      id: "tasmanian-emu",
+      commonName: "Tasmanian Emu",
+      scientificName: "Dromaius novaehollandiae diemenensis",
+      type: "Bird",
+      region: "Tasmania",
+      habitat: "Open woodland and grassland",
+      diet: "Plants, seeds, and insects",
+      period: "19th century",
+      extinctionCause: "Hunting and habitat conversion",
+      shortFact: "This island emu subspecies disappeared quickly after European settlement.",
+      category: "Island endemic",
+      extinctionYear: 1865,
+      image: "assets/images/Tasmanian emu.png"
+    },
+    {
+      id: "west-african-black-rhino",
+      commonName: "West African Black Rhinoceros",
+      scientificName: "Diceros bicornis longipes",
+      type: "Mammal",
+      region: "West Africa",
+      habitat: "Savanna and dry shrubland",
+      diet: "Leaves and woody shrubs",
+      period: "21st century",
+      extinctionCause: "Poaching and weak protection systems",
+      shortFact: "It was officially declared extinct in 2011 after years of severe poaching pressure.",
+      category: "Modern extinction",
+      extinctionYear: 2011,
+      image: "assets/images/West African black rhinoceros.png"
+    },
+    {
+      id: "japanese-sea-lion",
+      commonName: "Japanese Sea Lion",
+      scientificName: "Zalophus japonicus",
+      type: "Marine Mammal",
+      region: "Northwest Pacific",
+      habitat: "Coastal islands and rocky shores",
+      diet: "Fish and squid",
+      period: "20th century",
+      extinctionCause: "Overhunting and wartime habitat disturbance",
+      shortFact: "Large hunting operations in the late 19th and early 20th century drove rapid decline.",
+      category: "Marine extinction",
+      extinctionYear: 1974,
+      image: "assets/images/sea lion.png"
+    },
+    {
+      id: "caribbean-monk-seal",
+      commonName: "Caribbean Monk Seal",
+      scientificName: "Neomonachus tropicalis",
+      type: "Marine Mammal",
+      region: "Caribbean Sea and Gulf of Mexico",
+      habitat: "Warm coastal waters and sandy islands",
+      diet: "Fish and crustaceans",
+      period: "20th century",
+      extinctionCause: "Commercial hunting and fish stock depletion",
+      shortFact: "It was the first seal species to become extinct due to human activity in modern times.",
+      category: "Marine extinction",
+      extinctionYear: 1952,
+      image: "assets/images/Caribbean monk seal.png"
+    },
+    {
+      id: "pinta-island-tortoise",
+      commonName: "Pinta Island Tortoise",
+      scientificName: "Chelonoidis abingdonii",
+      type: "Reptile",
+      region: "Galapagos Islands",
+      habitat: "Dry island scrubland",
+      diet: "Cactus pads, grasses, and herbs",
+      period: "21st century",
+      extinctionCause: "Overexploitation and introduced species",
+      shortFact: "Lonesome George, the last known individual, died in 2012.",
+      category: "Island endemic",
+      extinctionYear: 2012,
+      image: "assets/images/tortoise.png"
+    },
+    {
+      id: "elephant-bird",
+      commonName: "Elephant Bird",
+      scientificName: "Aepyornis maximus",
+      type: "Bird",
+      region: "Madagascar",
+      habitat: "Forests and marsh edges",
+      diet: "Fruits and plant material",
+      period: "17th century",
+      extinctionCause: "Hunting and habitat pressure",
+      shortFact: "Its eggs are among the largest known in the animal kingdom.",
+      category: "Island endemic",
+      extinctionYear: 1650,
+      image: "assets/images/Elephant Bird.png"
+    },
+    {
+      id: "haasts-eagle",
+      commonName: "Haast's Eagle",
+      scientificName: "Hieraaetus moorei",
+      type: "Bird",
+      region: "New Zealand",
+      habitat: "Forest and alpine zones",
+      diet: "Large flightless birds, especially moa",
+      period: "15th century",
+      extinctionCause: "Prey loss and habitat change",
+      shortFact: "It is considered one of the largest eagles to have existed in recent history.",
+      category: "Predator extinction",
+      extinctionYear: 1445,
+      image: "assets/images/Haast's eagle.png"
+    },
+    {
+      id: "irish-elk",
+      commonName: "Irish Elk",
+      scientificName: "Megaloceros giganteus",
+      type: "Mammal",
+      region: "Europe and Western Asia",
+      habitat: "Open grasslands and woodland edges",
+      diet: "Grasses and herbs",
+      period: "Late Pleistocene to early Holocene",
+      extinctionCause: "Climate change and habitat shift",
+      shortFact: "Despite the name, it was not limited to Ireland and was closer to deer than elk.",
+      category: "Ice Age megafauna",
+      extinctionYear: -7700,
+      image: "assets/images/Irish Elk.png"
+    },
+    {
+      id: "megalodon",
+      commonName: "Megalodon",
+      scientificName: "Otodus megalodon",
+      type: "Fish",
+      region: "Global oceans",
+      habitat: "Warm and temperate seas",
+      diet: "Large marine vertebrates",
+      period: "Neogene period",
+      extinctionCause: "Ocean cooling and prey ecosystem changes",
+      shortFact: "Megalodon is known mostly from fossil teeth, some over 15 centimeters long.",
+      category: "Prehistoric marine predator",
+      extinctionYear: -3600000,
+      image: "assets/images/Megalodon.png"
     }
   ];
 
@@ -266,7 +460,7 @@
 
         card.innerHTML =
           "<div class='species-image'>" +
-          "<img loading='lazy' src=\"" + buildAssetUrl(species.image) + "\" alt=\"" + species.commonName + " image\"/>" +
+          "<img loading='lazy' src=\"" + resolveSpeciesImage(species) + "\" alt=\"" + species.commonName + " image\"/>" +
           "</div>" +
           "<div class='species-body'>" +
           "<h3>" + species.commonName + "</h3>" +
@@ -301,7 +495,7 @@
     function openModal(species) {
       modalTitle.textContent = species.commonName;
       modalScientific.textContent = species.scientificName;
-      modalImage.src = buildAssetUrl(species.image);
+      modalImage.src = resolveSpeciesImage(species);
       modalImage.alt = species.commonName + " image";
 
       modalFacts.innerHTML =
